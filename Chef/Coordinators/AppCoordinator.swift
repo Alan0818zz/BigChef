@@ -7,6 +7,7 @@
 import UIKit
 import FirebaseAuth // 為了檢查 Auth.auth().currentUser 和登出
 
+@MainActor
 final class AppCoordinator: Coordinator {
     var router: Router
     var childCoordinators: [Coordinator] = []
@@ -39,9 +40,6 @@ final class AppCoordinator: Coordinator {
     private func isLoggedIn() -> Bool {
         let loggedIn = Auth.auth().currentUser != nil
         print("AppCoordinator: 檢查登入狀態 - \(loggedIn)")
-        if let user = Auth.auth().currentUser {
-            print("AppCoordinator: 目前 Firebase 偵測到的用戶 UID: \(user.uid), Email: \(user.email ?? "N/A")")
-        }
         return loggedIn
     }
 
